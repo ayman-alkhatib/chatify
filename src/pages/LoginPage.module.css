@@ -1,0 +1,20 @@
+.loginPage {
+    text-align: center;
+    background-color: #4acff9f2;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.loginPage .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 30%;
+    min-width: 250px;
+    max-width: 400px;
+}

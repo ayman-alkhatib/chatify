@@ -1,0 +1,40 @@
+@keyframes arrowLift {
+    0% {
+        margin-left: 30px;
+    }
+
+    100% {
+        margin-left: 125px;
+    }
+}
+
+@keyframes arrowRight {
+    0% {
+        margin-left: 125px;
+    }
+
+    100% {
+        margin-left: 30px;
+    }
+}
+
+@keyframes translateDown {
+    0% {
+        transform: translatey(calc(-100% - 10px));
+    }
+
+    100% {
+        transform: translatey(0);
+
+    }
+}
+
+@keyframes translateUp {
+    0% {
+        transform: translatey(0);
+    }
+
+    100% {
+        transform: translatey(calc(-100% - 10px));
+    }
+}

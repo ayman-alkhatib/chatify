@@ -1,0 +1,22 @@
+.swapBtns {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.swapBtns button {
+    border: none;
+    color: #fff;
+    background-color: #4acff9f2;
+    font-size: 17px;
+    cursor: pointer;
+    transition: opacity .2s ease-in-out;
+    opacity: 0.7;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.swapBtns button:hover {
+    opacity: 1;
+}

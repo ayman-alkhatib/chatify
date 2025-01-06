@@ -1,0 +1,55 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    margin: 10px auto;
+
+}
+
+.form input {
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.form input:focus {
+    outline: none;
+}
+
+.form button {
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 25px;
+    padding: 6px;
+    background-color: #079BCF;
+    cursor: pointer;
+    color: #fff;
+    transform: translatey(calc(-100% - 10px));
+}
+
+.form button:hover {
+    background-color: #007BA5;
+}
+
+.arrow {
+    height: 0;
+    width: 0;
+    border-bottom: 10px solid #fff;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    position: relative;
+    margin-right: auto;
+    margin-left: 30px;
+    margin-bottom: -10px;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: -8px;
+    margin-bottom: 8px;
+}
