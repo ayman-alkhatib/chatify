@@ -1,104 +1,89 @@
 import { useState } from "react";
 import styles from "./Form.module.css";
+import { supabase } from "../../logic/supabase";
 
-useState;
+import ErrorMessage from "./ErrorMessage";
+import { formValidation } from "../../logic/formValidation";
+
 function Form({ isSignup, animate }) {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
   const [errors, setErrors] = useState({});
 
-  let isValid = Object.keys(errors).length === 0;
-
-  function usernameValidate() {
-    const validUsername = /^[0-9A-Za-z]{4,16}$/;
-
-    if (!validUsername.test(username)) {
-      setErrors((errors) => ({
-        ...errors,
-        username:
-          "Your Username is not valid. Only characters and numbers are acceptable",
-      }));
-      isValid = false;
-    }
-  }
-  function passwordValidate() {
-    if (password.length < 6) {
-      setErrors((errors) => ({
-        ...errors,
-        password: "Password must be at least 6 characters long",
-      }));
-      isValid = false;
-    }
-  }
-  function passwordMatch() {
-    if (isSignup && password !== repeatPassword) {
-      setErrors((errors) => ({
-        ...errors,
-        repeatPassword: "Passwords do not match",
-      }));
-      isValid = false;
-    }
-  }
-  function formValidation() {
-    usernameValidate();
-    passwordValidate();
-    passwordMatch();
-  }
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    formValidation();
+    const validationErrors = formValidation(
+      email,
+      password,
+      repeatPassword,
+      isSignup
+    );
+    setErrors(validationErrors);
+    let isValid = Object.keys(validationErrors).length === 0;
+
     if (isValid && isSignup) {
-      console.log("User created");
-      console.log(
-        `Username: ${username}, Password: ${password}, Repeat Password: ${repeatPassword}`
-      );
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password: password,
+      });
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(data);
+      }
     }
+
     if (isValid && !isSignup) {
-      console.log("User logged in");
-      console.log(`Username: ${username}, Password: ${password}`);
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      if (error) {
+        console.error(error);
+      }
     }
   };
 
+  const arrowStyle = animate
+    ? isSignup
+      ? { animation: "arrowLift 500ms ease-in-out forwards " }
+      : { animation: "arrowRight 500ms ease-in-out forwards" }
+    : {};
+
+  const buttonStyle = animate
+    ? isSignup
+      ? { animation: "translateDown 500ms ease-in-out forwards" }
+      : { animation: "translateUp 500ms ease-in-out forwards" }
+    : {};
+
   return (
     <form className={styles.form} action="" onSubmit={handleSubmit}>
-      <span
-        className={styles.arrow}
-        style={
-          animate
-            ? isSignup
-              ? { animation: "arrowLift 500ms ease-in-out forwards " }
-              : { animation: "arrowRight 500ms ease-in-out forwards" }
-            : {}
-        }
-      ></span>
+      <span className={styles.arrow} style={arrowStyle}></span>
       <input
-        value={username}
+        value={email}
         onChange={(e) => {
           setErrors({});
-          setUsername(e.target.value);
+          setEmail(e.target.value);
         }}
-        onBlur={usernameValidate}
         type="text"
-        id="username"
-        placeholder="username"
+        id="email"
+        placeholder="email"
       />
-      {errors.username && <p className={styles.error}>{errors.username}</p>}
+      <ErrorMessage error={errors.email} />
       <input
         value={password}
         onChange={(e) => {
           setErrors({});
           setPassword(e.target.value);
         }}
-        onBlur={passwordValidate}
         type="password"
         name="password"
         id="password"
         placeholder="Password"
       />
-      {errors.password && <p className={styles.error}>{errors.password}</p>}
-
+      <ErrorMessage error={errors.password} />
       <input
         style={{ visibility: showRepeatPassword ? "visible" : "hidden" }}
         value={repeatPassword}
@@ -106,25 +91,16 @@ function Form({ isSignup, animate }) {
           setErrors({});
           setRepeatPassword(e.target.value);
         }}
-        onBlur={passwordMatch}
         type="Password"
         name="repeatPassword"
         placeholder="Repeat Password"
       ></input>
-      {errors.repeatPassword && (
-        <p className={styles.error}>{errors.repeatPassword}</p>
-      )}
+      <ErrorMessage error={errors.repeatPassword} />
       <button
-        style={
-          animate
-            ? isSignup
-              ? { animation: "translateDown 500ms ease-in-out forwards" }
-              : { animation: "translateUp 500ms ease-in-out forwards" }
-            : {}
-        }
+        style={buttonStyle}
         onAnimationStart={() => {
           if (isSignup) setShowRepeatPassword(true);
-          setUsername("");
+          setEmail("");
           setPassword("");
           setRepeatPassword("");
           setErrors({});
