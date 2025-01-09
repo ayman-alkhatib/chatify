@@ -5,7 +5,7 @@ import TextInputForm from "../component/chatPageComponents/TextInputForm.jsx";
 import useMessages from "../logic/useMessages.js";
 
 function ChatPage({ senderId }) {
-  const messages = useMessages();
+  const messages = useMessages(senderId);
 
   return (
     <section className={styles.chatPage}>
