@@ -1,0 +1,48 @@
+.chatListItem {
+    padding: 10px 20px;
+    color: white;
+    background-color: #444753;
+    font: 14px/20px "Lato", Arial, sans-serif;
+}
+
+.chatListItem:hover {
+    background-color: #444753;
+    box-shadow: inset 5px 0 0 0 rgb(115, 115, 115);
+    cursor: pointer;
+}
+
+.chatListItem img {
+    float: left;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.chatListItem .info {
+    float: left;
+    margin-top: 8px;
+}
+
+.chatListItem .info {
+    padding-left: 8px;
+}
+
+.chatListItem .info .status {
+    color: #92959E;
+}
+
+.icon {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.icon.online {
+    background-color: #86BB71
+}
+
+.icon.offline {
+    background-color: #E38968
+}
