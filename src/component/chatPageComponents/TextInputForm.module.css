@@ -1,0 +1,31 @@
+.msgerInputarea {
+    display: flex;
+    padding: 10px;
+    border-top: var(--border);
+    background: #eee;
+}
+
+.msgerInputarea * {
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 1em;
+}
+
+.msgerInput {
+    flex: 1;
+    background: #ddd;
+}
+
+.msgerSendBtn {
+    margin-left: 10px;
+    background: rgb(0, 196, 65);
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.23s;
+}
+
+.msgerSendBtn:hover {
+    background-color: rgb(0, 180, 50);
+}
