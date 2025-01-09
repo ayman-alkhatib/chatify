@@ -1,38 +1,18 @@
-import { useEffect, useState } from "react";
+import styles from "./ChatPage.module.css";
+import ChatPageHeader from "../component/chatPageComponents/ChatPageHeader.jsx";
+import MessagesList from "../component/chatPageComponents/MessagesList.jsx";
+import TextInputForm from "../component/chatPageComponents/TextInputForm.jsx";
+import useMessages from "../logic/useMessages.js";
 
-function ChatPage() {
-  const [state, setState] = useState(0);
-  const [state1, setState1] = useState(0);
-
-  useEffect(() => {
-    console.log("on mount");
-    function handleclick() {
-      console.log("click");
-    }
-    document.addEventListener("click", handleclick);
-
-    return () => {
-      document.removeEventListener("click", handleclick);
-    };
-  });
+function ChatPage({ senderId }) {
+  const messages = useMessages();
 
   return (
-    <>
-      <button
-        onClick={() => {
-          setState((S) => S + 1);
-        }}
-      >
-        click me {state}
-      </button>
-      <button
-        onClick={() => {
-          setState1((S) => S + 1);
-        }}
-      >
-        click me {state1}
-      </button>
-    </>
+    <section className={styles.chatPage}>
+      <ChatPageHeader />
+      <MessagesList messages={messages} senderId={senderId} />
+      <TextInputForm senderId={senderId} />
+    </section>
   );
 }
 

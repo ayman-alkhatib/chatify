@@ -1,12 +1,19 @@
+import { useEffect, useRef } from "react";
 import Message from "./Message";
 import styles from "./MessagesList.module.css";
-function MessagesList({ messages, chatListElementRef, senderId }) {
-  function dateToTime(date) {
-    return `${date.getHours().toString().padStart(2, "0")}:${date
-      .getMinutes()
-      .toString()
-      .padStart(2, "0")}`;
-  }
+import dateToTime from "../../logic/dateToTime";
+function MessagesList({ messages, senderId }) {
+  const chatListElementRef = useRef(null);
+
+  // Scroll to the bottom of the chat list when new messages are added
+  useEffect(() => {
+    if (chatListElementRef.current) {
+      chatListElementRef.current.scrollTo({
+        top: chatListElementRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [messages]);
 
   return (
     <main className={styles.msgerChat} ref={chatListElementRef}>
