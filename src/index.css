@@ -64,7 +64,7 @@ html {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    width: 60%;
+    width: 90%;
     margin: 0 auto;
     background-image: var(--body-bg);
     font-family: Helvetica, sans-serif;
