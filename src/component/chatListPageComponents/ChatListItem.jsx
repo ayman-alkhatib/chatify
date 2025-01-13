@@ -1,20 +1,21 @@
 import { useNavigate } from "react-router";
 import styles from "./ChatListItem.module.css";
-function ChatListItem({ friend, status }) {
+function ChatListItem({ chat, status }) {
   const navigate = useNavigate();
   return (
     <li
       className={styles.chatListItem}
-      onClick={() => navigate(`/chatPage/${friend.id}`)}
+      onClick={() => navigate(`/chatPage/${chat.id}`)}
     >
-      <img
-        src="https://a0.anyrgb.com/pngimg/1980/1942/pessoa-brussel-address-icon-user-profile-windows-10-login-avatar-person-user-icons.png"
-        alt="avatar"
-      />
+      <img src={chat.avatar} alt="avatar" />
       <div className={styles.info}>
-        <div className={styles.name}>{friend.username}</div>
+        <div className={styles.name}>{chat.username}</div>
         <div className={styles.status}>
-          <span className={`${styles.icon} ${status}`}></span>
+          <span
+            className={`${styles.icon} ${
+              status === "online" ? styles.online : styles.offline
+            }`}
+          ></span>
           {status}
         </div>
       </div>

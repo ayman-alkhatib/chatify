@@ -1,12 +1,10 @@
 import ChatListItem from "./ChatListItem";
 import styles from "./ChatList.module.css";
-function ChatList({ friends }) {
+function ChatList({ chats }) {
   return (
     <ul className={styles.chatList}>
-      {friends.map((friend) => {
-        return (
-          <ChatListItem key={friend.id} friend={friend} status={"online"} />
-        );
+      {chats.map((chat) => {
+        return <ChatListItem key={chat.id} chat={chat} status={"online"} />;
       })}
     </ul>
   );
