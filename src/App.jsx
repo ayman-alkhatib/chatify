@@ -6,6 +6,7 @@ import ChatPage from "./pages/ChatPage";
 import LoginPage from "./pages/LoginPage";
 import ChatsListPage from "./pages/ChatsListPage";
 import Nav from "./component/Nav";
+import { HashRouter } from "react-router";
 
 function App() {
   const [session, setSession] = useState(null);
@@ -23,11 +24,11 @@ function App() {
     return () => subscription.unsubscribe();
   }, []);
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Nav />}>
           <Route
-            path="/login"
+            path="login"
             element={
               !session ? <LoginPage /> : <Navigate to={"/chatsListPage"} />
             }
@@ -40,13 +41,9 @@ function App() {
             path="/chatPage/:receiverId"
             element={<ChatPage senderId={session?.user.id} receiverId={""} />}
           />
-          {/* <Route
-            path="*"
-            element={<Navigate to={session ? "/chatsListPage" : "/login"} />}
-          /> */}
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
