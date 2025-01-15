@@ -18,6 +18,8 @@ function ChatListItem({ chat, status }) {
             }`}
           ></span>
           {status}
+          <br />
+          <span>{chat.last_message}</span>
         </div>
       </div>
     </li>
