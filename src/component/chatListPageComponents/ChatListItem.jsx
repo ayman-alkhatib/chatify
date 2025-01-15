@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router";
 import styles from "./ChatListItem.module.css";
+import { routes } from "../../logic/router";
 function ChatListItem({ chat, status }) {
   const navigate = useNavigate();
   return (
     <li
       className={styles.chatListItem}
-      onClick={() => navigate(`/chatPage/${chat.id}`)}
+      onClick={() => navigate(`${routes.chatPage}/${chat.id}`)}
     >
       <img src={chat.avatar} alt="avatar" />
       <div className={styles.info}>

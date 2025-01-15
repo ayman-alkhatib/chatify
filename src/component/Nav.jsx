@@ -1,16 +1,15 @@
 import { Link, Outlet } from "react-router";
+import { routes } from "../logic/router";
+
 function Nav() {
   return (
     <>
       <ul>
         <li>
-          <Link to={"login"}>login</Link>
+          <Link to={routes.login}>login</Link>
         </li>
         <li>
-          <Link to={"chatsListPage"}>chatsListPage</Link>
-        </li>
-        <li>
-          <Link to={"chatPage"}>chatPage</Link>
+          <Link to={routes.chatsListPage}>chatsListPage</Link>
         </li>
       </ul>
       <Outlet />
