@@ -1,40 +1,29 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { supabase } from "../logic/supabase";
 import ChatList from "../component/chatListPageComponents/ChatList";
-import useSession from "../logic/useSession";
+import useChats from "../logic/useChats";
 
 function ChatsListPage() {
-  const [chats, setChats] = useState([]);
+  const chats = useChats();
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const session = useSession();
-  const userId = session?.user.id;
   async function searchUsers(search) {
     const { data, error } = await supabase
       .from("profiles")
       .select("*")
       .ilike("username", `%${search}%`);
 
-    if (error) console.error("Error searching users", error);
+    if (error) {
+      console.error("Error searching users", error);
+    }
 
-    setSearchResults(
-      data.filter((user) => !chats.map((chat) => chat.id).includes(user.id))
-    );
+    if (data) {
+      setSearchResults(
+        data.filter((user) => !chats.map((chat) => chat.id).includes(user.id))
+      );
+    }
   }
 
-  useEffect(() => {
-    if (!userId) return;
-    async function fetchFriends() {
-      const { data, error } = await supabase.rpc("get_chats", {
-        user_id: userId,
-      });
-
-      if (error) console.error("Error fetching friends", error);
-
-      if (data) setChats(data);
-    }
-    fetchFriends();
-  }, [userId]);
   return (
     <div>
       <h1>Chats List</h1>
