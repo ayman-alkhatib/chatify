@@ -29,17 +29,12 @@ function useChats() {
                 (payload) => {
                     switch (payload.eventType) {
                         case "INSERT":
-                            console.log('insert')
                             fetchChats()
                             break;
                         case "UPDATE":
-                            console.log('update')
-
                             fetchChats()
                             break;
                         case "DELETE":
-                            console.log('delete')
-
                             fetchChats()
                             break;
                         default:
