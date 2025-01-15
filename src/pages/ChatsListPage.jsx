@@ -3,11 +3,12 @@ import { supabase } from "../logic/supabase";
 import ChatList from "../component/chatListPageComponents/ChatList";
 import useSession from "../logic/useSession";
 
-function ChatsListPage({ userId }) {
+function ChatsListPage() {
   const [chats, setChats] = useState([]);
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-
+  const session = useSession();
+  const userId = session?.user.id;
   async function searchUsers(search) {
     const { data, error } = await supabase
       .from("profiles")
