@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../logic/supabase";
 import ChatList from "../component/chatListPageComponents/ChatList";
+import useSession from "../logic/useSession";
 
 function ChatsListPage({ userId }) {
   const [chats, setChats] = useState([]);
@@ -33,7 +34,6 @@ function ChatsListPage({ userId }) {
     }
     fetchFriends();
   }, [userId]);
-
   return (
     <div>
       <h1>Chats List</h1>
@@ -51,7 +51,7 @@ function ChatsListPage({ userId }) {
       {search.length > 0 && (
         <div className="searchResults">
           <h2>Search Results</h2>
-          <ChatList friends={searchResults} />
+          <ChatList chats={searchResults} />
           <button>add friend</button>
         </div>
       )}
